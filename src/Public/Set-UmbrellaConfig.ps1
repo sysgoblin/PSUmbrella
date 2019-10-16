@@ -1,7 +1,7 @@
 function Set-UmbrellaConfig {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)] 
+        [Parameter(Mandatory = $true)]
         [Parameter(ParameterSetName = 'Default')]
         [int]$OrgId,
 
@@ -47,7 +47,7 @@ function Set-UmbrellaConfig {
             $managementSecString = $currentConfig.keys.management
         }
     }
-    
+
     process {
         if ($PSBoundParameters.ReportKey) {
             $reportApiKey = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("$ReportKey`:$ReportSecret"))
