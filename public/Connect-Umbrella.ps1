@@ -1,4 +1,4 @@
-function Set-UmbrellaConfig {
+function Connect-Umbrella {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)] 
