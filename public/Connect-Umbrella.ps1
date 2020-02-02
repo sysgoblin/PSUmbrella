@@ -1,7 +1,7 @@
 function Connect-Umbrella {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)] 
+        [Parameter(Mandatory = $true)]
         [Parameter(ParameterSetName = 'Default')]
         [int]$OrgId,
 
@@ -20,7 +20,7 @@ function Connect-Umbrella {
         [Parameter(ParameterSetName = 'Default')]
         [string]$NetworkKey,
 
-        [Parameter(Mandatory = $true,
+        [Parameter(Mandatory = $false,
         ParameterSetName = 'Network')]
         [Parameter(ParameterSetName = 'Default')]
         [string]$NetworkSecret,
@@ -30,10 +30,15 @@ function Connect-Umbrella {
         [Parameter(ParameterSetName = 'Default')]
         [string]$ManagementKey,
 
-        [Parameter(Mandatory = $true,
+        [Parameter(Mandatory = $false,
         ParameterSetName = 'Management')]
         [Parameter(ParameterSetName = 'Default')]
-        [string]$ManagementSecret
+        [string]$ManagementSecret,
+
+        [Parameter(Mandatory = $false,
+        ParameterSetName = 'Credentials')]
+        [Parameter(ParameterSetName = 'Default')]
+        [pscredential]$Credentials
     )
 
     begin {
@@ -45,9 +50,11 @@ function Connect-Umbrella {
             $reportSecString = $currentConfig.keys.report
             $networkSecString = $currentConfig.keys.network
             $managementSecString = $currentConfig.keys.management
+            $usernameSecString = $currentConfig.creds.username
+            $passwordSecString = $currentConfig.creds.password
         }
     }
-    
+
     process {
         if ($PSBoundParameters.ReportKey) {
             $reportApiKey = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("$ReportKey`:$ReportSecret"))
@@ -70,6 +77,14 @@ function Connect-Umbrella {
             $managementApiKey = $managementSecString
         }
 
+        if ($PSBoundParameters.Credentials) {
+            $username = ConvertTo-SecureString $Credentials.UserName -AsPlainText -Force | ConvertFrom-SecureString
+            $password = $Credentials.Password | ConvertFrom-SecureString
+        } else {
+            $username = $usernameSecString
+            $password = $passwordSecString
+        }
+
         $conf = @{
             "org" = @{
                 "id" = "$orgId"
@@ -80,12 +95,15 @@ function Connect-Umbrella {
                 "network"   = "$networkApiKey"
                 "management" = "$managementApiKey"
             }
-        } | ConvertTo-Json
 
-        $conf | Out-File "$($env:AppData)\psumbrella\umbrellaconfig.json" -Force
+            "credentials" = @{
+                "username" = "$username"
+                "password" = "$password"
+            }
+        } | ConvertTo-Json
     }
 
     end {
-
+        $conf | Out-File "$($env:AppData)\psumbrella\umbrellaconfig.json" -Force
     }
 }
