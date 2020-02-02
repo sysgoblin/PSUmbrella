@@ -8,15 +8,15 @@ They break down as follows:
 
 Reporting API
 ```powershell
-Search-Umbrella
+Search-Umbrella # Search umbrella activity
 ```
 
 Management API
 ```powershell
-Get-UmbrellaNetwork
-Get-UmbrellaRoamingClients
-Get-UmbrellaSite
-Get-UmbrellaVirtualAppliance
+Get-UmbrellaNetwork             # List of all networks linked with Umbrella
+Get-UmbrellaRoamingClients      # List of all roaming clients and their status
+Get-UmbrellaSite                # List of sites linked with Umbrella
+Get-UmbrellaVirtualAppliance    # List of all VA's and their status
 ```
 
 There is also an insane amount of data you can interact with from Umbrella which is not accessible via the provided API's. The below cmdlets are made possible by providing a set of log in credentials and are pretty hacky so be warned I accept no responsibility if you use these destructively. These will also likely break if Umbrella change how they provide xsrf tokens or change their cookie set up.
@@ -24,26 +24,28 @@ I'm writing up more info on how these work and what kind of data you can interac
 
 Complete:
 ```powershell
-Get-UmbrellaMobileDevice
-Get-UmbrellaPolicy
+Get-UmbrellaApplication             # Get application(s) Umbrella allows you to block/allow
+Get-UmbrellaApplicationSettings     # Get application settings for all or specified app setting policy
+Get-UmbrellaDestinationList         # List destination lists or get the destinations of specified destination list
+Get-UmbrellaMobileDevice            # Get details of all mobile devices controlled by Umbrella (lots of info!!)
+Get-UmbrellaPolicy                  # Get policy information. Use -Detailed for loads more info
+Get-UmbrellaSecuritySettings        # Umbrella security settings and category selections
 ```
 
 WIP:
 ```powershell
-Get-UmbrellaApplicationSettings
-Get-UmbrellaBlockPage
-Get-UmbrellaContentCategory
-Get-UmbrellaDashboard
-Get-UmbrellaDestinationList
-Get-UmbrellaIntegrations
-Get-UmbrellaLinkedMDM
-Get-UmbrellaMessages
-Get-UmbrellaRequests
-Get-UmbrellaRootCert
-Get-UmbrellaSecuritySettings
-Set-UmbrellaAccount
-Set-UmbrellaBlockPage
-Set-UmbrellaDestinationList
+Get-UmbrellaAccount                 # Get user account info
+Get-UmbrellaBlockPage               # Get information of configured block pages
+Get-UmbrellaContentCategory         #
+Get-UmbrellaDashboard               #
+Get-UmbrellaIntegrations            #
+Get-UmbrellaLinkedMDM               #
+Get-UmbrellaMessages                #
+Get-UmbrellaRequests                #
+Get-UmbrellaRootCert                #
+Set-UmbrellaAccount                 #
+Set-UmbrellaBlockPage               #
+Set-UmbrellaDestinationList         #
 ```
 
 ## Setup
