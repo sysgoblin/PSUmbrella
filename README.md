@@ -24,9 +24,13 @@ I'm writing up more info on how these work and what kind of data you can interac
 
 Complete:
 ```powershell
+Get-UmbrellaAccount                 # Get user account info
 Get-UmbrellaApplication             # Get application(s) Umbrella allows you to block/allow
 Get-UmbrellaApplicationSettings     # Get application settings for all or specified app setting policy
+Get-UmbrellaBlockPage               # Get information of configured block pages
+Get-UmbrellaContentCategory         # Returns content category settings. Enabled categories are returned in results for specific content category profile
 Get-UmbrellaDestinationList         # List destination lists or get the destinations of specified destination list
+Get-UmbrellaLinkedMDM               # Get info on MDM solutions linked with Umbrella (note this can include a lot of senstitive info)
 Get-UmbrellaMobileDevice            # Get details of all mobile devices controlled by Umbrella (lots of info!!)
 Get-UmbrellaPolicy                  # Get policy information. Use -Detailed for loads more info
 Get-UmbrellaSecuritySettings        # Umbrella security settings and category selections
@@ -34,15 +38,8 @@ Get-UmbrellaSecuritySettings        # Umbrella security settings and category se
 
 WIP:
 ```powershell
-Get-UmbrellaAccount                 # Get user account info
-Get-UmbrellaBlockPage               # Get information of configured block pages
-Get-UmbrellaContentCategory         #
-Get-UmbrellaDashboard               #
 Get-UmbrellaIntegrations            #
-Get-UmbrellaLinkedMDM               #
-Get-UmbrellaMessages                #
 Get-UmbrellaRequests                #
-Get-UmbrellaRootCert                #
 Set-UmbrellaAccount                 #
 Set-UmbrellaBlockPage               #
 Set-UmbrellaDestinationList         #
